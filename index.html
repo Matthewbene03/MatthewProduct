@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/tag.css">
+    <link rel="stylesheet" href="./css/class.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="shortcut icon" type="imagex/png" href="./img/iconeShoppingBag.svg">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <section class="DFlex_row centralizar70Porc">
+        <div class="imgLogoDoEmpresa">
+            <img src="./img/logo(MathhewProduct).png">
+        </div>
+        <div class="FormLogin">
+            <form id="form" action="#" class="centralizar90Porc">
+                <div class="login">
+                    <label for="login">Login</label> <br>
+                    <input type="text" name="login" id="login" placeholder="Digite o seu login..." autocomplete="off">
+                </div>
+                <div class="senha">
+                    <label for="senha">Senha</label>
+                    <div class="campoSenha">
+                        <input type="password" name="senha" id="senha" placeholder="Digite a sua senha...">
+                        <img id="iconeVisibilityOff" src="./img/iconeVisibilityOff.svg" onclick="vizualizarSenha()">
+                        <img id="iconeVisibilityOn" src="./img/iconeVisibilityOn.svg" onclick="ocultarSenha()">
+                    </div>
+                </div>
+                <div class="entrar">
+                    <button id="BtnEntrar" type="button" onclick="autenticarLogin()">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="./js/index.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.validate.js"></script>
+    <script src="./js/bootstrap.js"></script>
+</body>
+</html>

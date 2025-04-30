@@ -1,0 +1,143 @@
+header {
+    height: 10vh;
+    background-color: darkgrey;
+}
+
+nav.DFlex_row {
+    justify-content: space-between;
+    height: 100%;
+
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.logo h1 {
+    font-size: 40px;
+}
+
+.logo a{
+    padding: 0px;
+    text-decoration: none;
+}
+
+.logo a:hover{
+    border-bottom: none;
+}
+
+.divUsuarioOn {
+    height: auto;
+}
+
+.usuarioOn {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid gray;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 10px;
+    width: 300px;
+}
+
+div.link .BtnSair {
+    display: none;
+}
+
+.BtnSair {
+    font-size: 17px;
+    padding: 10px;
+    text-decoration: none;
+    border: 2px solid rgb(165, 3, 3);
+    color: rgb(165, 3, 3);
+}
+
+.BtnSair:hover {
+    border: 2px solid red;
+}
+
+@media screen and (max-width: 424px){
+    header {
+        height: auto;
+        background-color: darkgrey;
+    }
+
+    nav.DFlex_row {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        border: 2px solid red;
+    }
+    
+    .logo img{
+        display: none;
+    }
+
+    .logo h1 {
+        font-size: 30px;
+    }
+
+    div.link{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: 100%;
+    }
+
+    div.link a.BtnSair {
+        display: inline;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    div.link a.BtnSair:hover {
+        border-bottom: 2px solid rgb(165, 3, 3);
+    }
+
+    .divUsuarioOn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 849px) and (min-width: 425px){
+    header {
+        height: 15vh;
+        background-color: darkgrey;
+    }
+
+    nav.DFlex_row {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    div.link a.BtnSair {
+        display: inline;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    div.link a.BtnSair:hover {
+        border-bottom: 2px solid rgb(165, 3, 3);
+    }
+
+    .divUsuarioOn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 850px) {
+    .divUsuarioOn {
+        display: none;
+    }
+
+    div.link .BtnSair {
+        display: inline;
+    }
+}

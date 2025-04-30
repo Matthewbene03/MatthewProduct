@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/tag.css">
+    <link rel="stylesheet" href="./css/class.css">
+    <link rel="stylesheet" href="./css/alertaPreco.css">
+    <link rel="stylesheet" href="./css/menuAcesso.css">
+    <link rel="shortcut icon" type="imagex/png" href="./img/iconeShoppingBag.svg">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Alerta de Preço</title>
+</head>
+
+<body>
+    <header>
+        <nav class="DFlex_row">
+            <div class="logo">
+                <img class="icone" src="./img/iconeShoppingBag.svg">
+                <a href="alertaPreco.html">
+                    <h1>MatthewProduct</h1>
+                </a>
+            </div>
+            <div class="link">
+                <a href="alertaPreco.html">Alerta de Preço</a>
+                <a href="minhasCompras.html">Minhas Compras</a>
+                <a class="BtnSair" href="./menuAcesso.html">Sair</a>
+            </div>
+            <div class="DFlex_row divUsuarioOn">
+                <p id="usuarioOn" class="usuarioOn"></p>
+                <a class="BtnSair" href="./menuAcesso.html">Sair</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="centralizar80Porc">
+        <h1>Alertas de preço dos produtos</h1>
+        <hr>
+    </section>
+
+    <section class="secPrincipal centralizar80Porc">
+        <h2>Cadastro de alerta para o seus produtos.</h2>
+        <p>Informe nesse formulario abaixo quais produtos você tem interrese que seja monitorado o valor.</p>
+        <p>Selecione todos os campos abaixo e envie as informações para o nosso sistema.</p>
+        <form action="">
+            <div class="DFlex_row dadosProduto">
+                <div class="divIdDoProduto">
+                    <label for="idProduto">Id do produto:</label><br>
+                    <input type="text" disabled name="idProduto" id="idProduto" placeholder="ID: ">
+                </div>
+                <div class="divProduto">
+                    <label for="produto">Seus produtos:</label>
+                    <select name="produtos" id="produtos">
+                        <option selected disabled value="">Selecione um produto</option>
+                    </select>
+                </div>
+                <div class="divValorProduto">
+                    <label for="valorProduto">Valor atual: </label>
+                    <input type="number" disabled name="valorProduto" id="valorProduto" placeholder="Valor: ">
+                </div>
+            </div>
+            <div class="valorEAcao DFlex_row">
+                <div class="valorDesejado">
+                    <label for="valorDesejado">Informe o valor desejado: </label> <br>
+                    <input type="number" name="valorDesejado" id="valorDesejado">
+                </div>
+                <div class="acaoProduto">
+                    <label for="">Escolha uma ação:</label>
+                    <select name="ação" id="acao">
+                        <option selected disabled value="">Selecione uma ação</option>
+                        <option value="Notificacao">Notificação</option>
+                        <option value="Compra">Compra</option>
+                    </select>
+                </div>
+            </div>
+            <div class="botao">
+                <button class="buttonMenu" type="button">Cadastrar ação</button>
+            </div>
+        </form>
+    </section>
+
+
+    <script src="./js/alertaPreco.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.validate.js"></script>
+    <script src="./js/bootstrap.js"></script>
+</body>
+
+</html>

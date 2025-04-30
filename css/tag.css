@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Cal Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
+}
+
+p, a, input, label, select{
+    font-family: "Karla", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    color: black;
+}
+
+a{
+    font-size: 20px;
+    padding: 15px 10px;
+    text-decoration: none;
+}
+
+a:hover{
+    border-bottom: 2px solid black;
+}
+
+input, select{
+    width: 100%;
+    height: 60px;
+    border: 1px solid rgb(201, 201, 201);
+    margin: 10px 0px;
+    padding-left: 15px;
+}
+
+input::placeholder, select::placeholder{
+    font-family: "Karla", sans-serif;
+    color: gray;
+    font-size: 20px;
+}
+
+label {
+    color: black;
+    font-size: 25px;
+}
+
+button {
+    padding: 15px 80px;
+    background-color: #e92d2b;
+    /*Trocar a cor depois que pegar a imagem oficial*/
+    border: 2px solid #e92d2b;
+    /*Trocar a cor depois que pegar a imagem oficial*/
+    border-radius: 5px;
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+}
