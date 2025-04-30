@@ -26,11 +26,11 @@
             <div class="link">
                 <a href="alertaPreco.html">Alerta de Preço</a>
                 <a href="minhasCompras.html">Minhas Compras</a>
-                <a class="BtnSair" href="./menuAcesso.html">Sair</a>
+                <a class="BtnSair" href="./index.html">Sair</a>
             </div>
             <div class="DFlex_row divUsuarioOn">
                 <p id="usuarioOn" class="usuarioOn"></p>
-                <a class="BtnSair" href="./menuAcesso.html">Sair</a>
+                <a class="BtnSair" href="./index.html">Sair</a>
             </div>
         </nav>
     </header>
@@ -51,8 +51,8 @@
                     <input type="text" disabled name="idProduto" id="idProduto" placeholder="ID: ">
                 </div>
                 <div class="divProduto">
-                    <label for="produto">Seus produtos:</label>
-                    <select name="produtos" id="produtos">
+                    <label for="produtos">Seus produtos:</label>
+                    <select name="produtos" id="produtos" onblur="addIdValorProduto()">
                         <option selected disabled value="">Selecione um produto</option>
                     </select>
                 </div>
@@ -67,7 +67,7 @@
                     <input type="number" name="valorDesejado" id="valorDesejado">
                 </div>
                 <div class="acaoProduto">
-                    <label for="">Escolha uma ação:</label>
+                    <label for="acao">Escolha uma ação:</label>
                     <select name="ação" id="acao">
                         <option selected disabled value="">Selecione uma ação</option>
                         <option value="Notificacao">Notificação</option>
@@ -82,10 +82,10 @@
     </section>
 
 
-    <script src="./js/alertaPreco.js"></script>
     <script src="./js/jquery.js"></script>
     <script src="./js/jquery.validate.js"></script>
     <script src="./js/bootstrap.js"></script>
+    <script src="./js/alertaPreco.js"></script>
 </body>
 
 </html>
