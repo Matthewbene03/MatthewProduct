@@ -2,13 +2,14 @@
 
 //Classe AlertaAcao: Uma classa que é um alerta de cada ação que o usuario autenticado criar.
 class AlertaAcao {
-    constructor(Usuario, idProduto, descricao, valorAntigo, valorDesejado, valorAtual, acao) {
+    constructor(Usuario, idProduto, descricao, valorAntigo, valorDesejado, valorAtual, valorCompra, acao) {
         this.Usuario = Usuario;
         this.idProduto = idProduto;
         this.descricao = descricao;
         this.valorAntigo = valorAntigo;
         this.valorDesejado = valorDesejado;
         this.valorAtual = valorAtual;
+        this.valorCompra = valorCompra;
         this.acao = acao;
     }
 }
@@ -28,11 +29,6 @@ $(document).ready(function () {
     paragrafoNomeUsuario.append(usuarioOn.nome);
 
     carregarSelectDeProdutos();
-
-    if (!localStorage.alertasPreco) {
-        let alertaPreco = [];
-        localStorage.setItem("alertasPreco", JSON.stringify(alertaPreco));
-    }
 });
 
 async function carregarSelectDeProdutos() {
@@ -77,6 +73,7 @@ async function addIdValorProduto() {
 async function cadastrarAcao() {
     let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado"));
     let alertasAcao = JSON.parse(localStorage.getItem("alertasPreco")); //Pega todos os alertasAcao
+    let compras = JSON.parse(localStorage.getItem("compras")); //Pega todos as compras cadastradas.
 
     if (alertasAcao.some(alerta => alerta.idProduto === inputIdProduto.val())) {
         alert("Você não pode cadastrar mais de um alerta para um mesmo produto!!! Tente outro...")
@@ -87,12 +84,20 @@ async function cadastrarAcao() {
         let valorDesejado = inputValorDesejado.val();
         let acao = selectAcao.val();
         let valorAtual = null;
+        let valorCompra = null;
 
-        let alertaAcao = new AlertaAcao(usuario, idProduto, produto, valorAntigo, valorDesejado, valorAtual, acao); //Crio um objeto alerta.
-
-        alertasAcao.push(alertaAcao); //Adiciono na lista de alertas o alerta que acabou de ser instanciado. 
-
-        localStorage.setItem("alertasPreco", JSON.stringify(alertasAcao)); //Salvo no localStorage
+        let alertaAcao = new AlertaAcao(usuario, idProduto, produto, valorAntigo, valorDesejado, valorAtual, valorCompra,acao); //Crio um objeto alerta.
+        
+        if(acao === "Notificacao"){
+            alertasAcao.push(alertaAcao); //Adiciono na lista de alertas o alerta que acabou de ser instanciado.                 
+            localStorage.setItem("alertasPreco", JSON.stringify(alertasAcao)); //Salvo no localStorage
+        } else if(acao === "Compra"){
+            alertaAcao.valorCompra = valorAntigo;
+            compras.push(alertaAcao);
+            alertasAcao.push(alertaAcao);
+            localStorage.setItem("alertasPreco", JSON.stringify(alertasAcao)); //Salvo no localStorage
+            localStorage.setItem("compras", JSON.stringify(compras)); //Salvo no localStorage
+        }
 
         alert("Cadastro de alerta de preço feito com sucesso!!!");
     }
