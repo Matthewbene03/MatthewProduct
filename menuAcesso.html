@@ -15,7 +15,7 @@
         <nav class="DFlex_row">
             <div class="logo">
                 <img class="icone" src="./img/iconeShoppingBag.svg">
-                <a href="menuAcesso.html"><h1>MatthewProduct</h1></a>
+                <a href="menuAcesso.html"><h2>MatthewProduct</h2></a>
             </div>
             <div class="link">
                 <a href="alertaPreco.html">Alerta de Preço</a>
@@ -29,17 +29,44 @@
         </nav>
     </header>
 
-    <!--<section>
-        <iframe id="alertaPreco" src="alertaPreco.html" frameborder="0" title="Pagina alerta de preço" style="height: 80vh; width: 100%; display: none;"></iframe>
+    <section class="centralizar80Porc">
+        <h1>Meus Alertas Cadastrado</h1>
+        <hr>
     </section>
 
-    <section>
-        <iframe id="minhasCompras" src="minhasCompras.html" frameborder="0" title="Pagina das compras feitos pelos usuarios" style="height: 80vh; width: 100%; display: none;"></iframe>
-    </section>-->
+    <section class="TabelaAlertas centralizar80Porc">
 
-    <script src="./js/menuAcesso.js"></script>
+        <div class="tituloTabela">
+            <h3>Tabela dos Alertas</h3>
+            <hr>
+        </div>
+
+        <div id="paragrafoAviso" class="paragrafoAviso">
+            <p>Você não tem nenhum alerta cadastrado!!!</p>
+            <p>Vá até a pagina Alerta de Preço e cadastra um alerta para um dos seus produtos!!!</p>
+        </div>
+
+        <table id="tabela" class="TabelaMenuAcesso">
+            <thead>
+                <tr>
+                    <th>ID</th> <!--Coluna do Id do produto-->
+                    <th>Descrição</th> <!--Coluna da descrição do produto-->
+                    <th>Valor</th> <!--Coluna do valor antigo do produto-->
+                    <th>Valor desejado</th> <!--Coluna do valor desejado do produto-->
+                    <th>Ação</th> <!--Coluna do valor atual do produto-->
+                    <th>Cancelar:</th> <!--Coluna do valor atual do produto-->
+                    <!--<th>Imagem</th> Coluna da imagem do produto-->
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </section>
+
     <script src="./js/jquery.js"></script>
     <!--<script src="./js/jquery.validate.js"></script>-->
     <script src="./js/bootstrap.js"></script>
+    <script src="./js/menuAcesso.js"></script>
+
 </body>
 </html>

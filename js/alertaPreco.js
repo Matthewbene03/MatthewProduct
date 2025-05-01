@@ -1,7 +1,20 @@
 // --->>>---Inicio do código JS para a pagina alertaPreco.html ---<<<---
 
+//Classe AlertaAcao: Uma classa que é um alerta de cada ação que o usuario autenticado criar.
+class AlertaAcao {
+    constructor(Usuario, idProduto, descricao, valorAntigo, valorDesejado, valorAtual, acao) {
+        this.Usuario = Usuario;
+        this.idProduto = idProduto;
+        this.descricao = descricao;
+        this.valorAntigo = valorAntigo;
+        this.valorDesejado = valorDesejado;
+        this.valorAtual = valorAtual;
+        this.acao = acao;
+    }
+}
+
 //Variaveis globais: Aqui tem todas as variaveis globais que utilizo para a pagina index.html, como para pegar os elementos html (input, button).
-let paragrafoNomeUsuario, inputIdProduto, inputValorProduto, selectProduto, inputValorDesejado, selectAcao;
+let paragrafoNomeUsuario, inputIdProduto, inputValorProduto, selectProduto, inputValorDesejado, selectAcao, valorProduto, idProduto;
 
 $(document).ready(function () {
     paragrafoNomeUsuario = $("#usuarioOn"); //Recebe o paragrafo para colocar o nome do usuario online na pagina.
@@ -39,11 +52,11 @@ async function carregarSelectDeProdutos() {
 }
 
 async function addIdValorProduto() {
-    try{
+    try {
         let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado"));
         let resposta = await fetch("https://api-odinline.odiloncorrea.com/produto/" + usuario.chave + "/usuario");
         let produtosUsuario = await resposta.json();
-        
+
         console.log(produtosUsuario);
 
         let descricaoProduto = selectProduto.val();
@@ -52,10 +65,8 @@ async function addIdValorProduto() {
 
         produtosUsuario.forEach(produto => {
             if (produto.descricao === descricaoProduto) {
-                console.log(produto.id);
-                inputIdProduto.attr({placeholder: "ID: " + produto.id});
-                console.log(produto.valor)
-                inputValorProduto.attr({placeholder: "Valor: " + produto.valor});
+                inputIdProduto.val(produto.id);
+                inputValorProduto.val(produto.valor);
             }
         });
     } catch (error) {
@@ -63,3 +74,32 @@ async function addIdValorProduto() {
     }
 }
 
+async function cadastrarAcao() {
+    let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado"));
+    let alertasAcao = JSON.parse(localStorage.getItem("alertasPreco")); //Pega todos os alertasAcao
+
+    if (alertasAcao.some(alerta => alerta.idProduto === inputIdProduto.val())) {
+        alert("Você não pode cadastrar mais de um alerta para um mesmo produto!!! Tente outro...")
+    } else {
+        let idProduto = inputIdProduto.val();
+        let produto = selectProduto.val();
+        let valorAntigo = inputValorProduto.val();
+        let valorDesejado = inputValorDesejado.val();
+        let acao = selectAcao.val();
+        let valorAtual = null;
+
+        let alertaAcao = new AlertaAcao(usuario, idProduto, produto, valorAntigo, valorDesejado, valorAtual, acao); //Crio um objeto alerta.
+
+        alertasAcao.push(alertaAcao); //Adiciono na lista de alertas o alerta que acabou de ser instanciado. 
+
+        localStorage.setItem("alertasPreco", JSON.stringify(alertasAcao)); //Salvo no localStorage
+
+        alert("Cadastro de alerta de preço feito com sucesso!!!");
+    }
+
+    inputIdProduto.val("");
+    selectProduto.val("");
+    inputValorProduto.val("");
+    inputValorDesejado.val("");
+    selectAcao.val("");
+}

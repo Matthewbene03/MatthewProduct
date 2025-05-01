@@ -39,7 +39,7 @@ section.secPrincipal p{
 }
 
 section.secPrincipal form{
-    margin-top: 100px;
+    margin-top: 80px;
     height: auto;
 }
 
@@ -62,7 +62,7 @@ form label{
     background-color: rgb(189, 186, 186);
 }
 
-#idProduto::placeholder, #valorProduto::placeholder{
+#idProduto, #valorProduto{
     color: white;
     font-size: 20px;
 }
