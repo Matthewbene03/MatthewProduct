@@ -1,5 +1,9 @@
 /*Estilização para o conteudo do header*/
 
+.logo h1 {
+    font-size: 40px;
+}
+
 section{
     height: auto;
     padding-top: 15px;

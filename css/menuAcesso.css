@@ -1,5 +1,5 @@
 header {
-    height: 10vh;
+    height: 120px;
     background-color: darkgrey;
 }
 
@@ -79,6 +79,7 @@ section.TabelaAlertas{
     border: 2px solid darkgray;
     padding-left: 50px;
     padding-right: 50px;
+    overflow: auto;
 }
 
 .tituloTabela{
@@ -179,9 +180,30 @@ td{
     }
 }
 
+@media screen and (max-width: 660px) {
+
+    .tituloPagina{
+        width: 98%;
+    }
+
+    section.TabelaAlertas{
+        padding: 0;
+        width: 98%;
+    }
+
+    .tituloTabela{
+        font-size: 25px;
+        padding-bottom: 40px;
+    }
+
+    section.TabelaAlertas hr{
+        display: none;
+    }
+}
+
 @media screen and (max-width: 849px) and (min-width: 425px){
     header {
-        height: 15vh;
+        height: 140px;
         background-color: darkgrey;
     }
 
@@ -207,6 +229,11 @@ td{
     .divUsuarioOn {
         display: none;
     }
+
+    .paragrafoAviso p{
+        font-size: 15px;
+        color: red;
+    }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 850px) {
@@ -216,5 +243,10 @@ td{
 
     div.link .BtnSair {
         display: inline;
+    }
+
+    .paragrafoAviso p{
+        font-size: 20px;
+        color: red;
     }
 }

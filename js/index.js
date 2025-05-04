@@ -70,3 +70,10 @@ function ocultarSenha() {
     let senha = inputSenha;
     senha.type = "password";
 }
+
+document.addEventListener('keyup', function(event) {
+    if(event.keyCode === 13){
+        event.preventDefault();
+        buttonEntrar.click();
+    }
+})
