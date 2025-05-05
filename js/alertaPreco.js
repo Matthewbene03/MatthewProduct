@@ -103,9 +103,7 @@ async function cadastrarAcao() {
         let notificacao = JSON.parse(localStorage.getItem("notificacao")); //Pega todos as notificacões cadastradas.
 
         if (alertasAcao.some(alerta => alerta.idProduto === inputIdProduto.val())) {
-            alert("Você não pode cadastrar mais de um alerta para um mesmo produto!!! Tente outro...")
-        } else if(compras.some(compra => compra.idProduto === inputIdProduto.val())){
-            alert("Você já comprou esse produto!!!")
+            alert("Você tem um alerta de preço para esse produto em aberto! Cancela ele para fazer uma compra ou tente outro produto...");
         } else {
             let idProduto = inputIdProduto.val();
             let produto = selectProduto.val();
@@ -125,8 +123,6 @@ async function cadastrarAcao() {
             } else if (acao === "Compra") {
                 alertaAcao.valorCompra = valorAntigo;
                 compras.push(alertaAcao);
-                alertasAcao.push(alertaAcao);
-                localStorage.setItem("alertasPreco", JSON.stringify(alertasAcao)); //Salvo no localStorage
                 localStorage.setItem("compras", JSON.stringify(compras)); //Salvo no localStorage
             }
 

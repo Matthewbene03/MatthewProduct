@@ -44,6 +44,10 @@ function addParagrafoAviso() {
 
 function mostrarTabela() {
     let vetAlertaPreco = JSON.parse(localStorage.getItem("alertasPreco"));
+    let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado"));
+    vetAlertaPreco = vetAlertaPreco.filter(alerta =>{
+        return alerta.Usuario.id === usuario.id;
+    });
 
     if (vetAlertaPreco.length === 0 || !(vetAlertaPreco.some(notificacao => notificacao.acao === "Notificacao"))) { //Significa que o vetor de alerta tem alertas cadastrados.
         addParagrafoAviso();

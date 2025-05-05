@@ -28,6 +28,10 @@ function addParagrafoAviso() {
 
 function mostrarTabela() {
     let vetCompras = JSON.parse(localStorage.getItem("compras"));
+    let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado"));
+    vetCompras = vetCompras.filter(compra =>{
+        return compra.Usuario.id === usuario.id;
+    });
 
     if (vetCompras.length === 0) { //Significa que o vetor de alerta tem alertas cadastrados.
         addParagrafoAviso();
