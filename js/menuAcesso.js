@@ -59,8 +59,8 @@ function mostrarTabela() {
                 `<tr>
                 <td>${alerta.idProduto}</td>
                 <td>${alerta.descricao}</td>
-                <td>R$${alerta.valorAntigo}</td>
-                <td>R$${alerta.valorDesejado}</td>
+                <td id="valorAntigo">R$${alerta.valorAntigo}</td>
+                <td id="valorDesejado">R$${alerta.valorDesejado}</td>
                 <td>${alerta.acao}</td>
                 <td><button type="button" class="BtnCancelarAcao" onclick="cancelarAcao(this)">Cancelar Ação</button></td>
             </tr>`
