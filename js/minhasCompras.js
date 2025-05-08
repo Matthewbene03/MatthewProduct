@@ -44,6 +44,7 @@ function mostrarTabela() {
                 <td>${compra.descricao}</td>
                 <td>R$${compra.valorCompra}</td>
                 <td>${compra.acao}</td>
+                <td>${compra.dataCompra}</td>
             </tr>`
         tbody.append(linha);
     });

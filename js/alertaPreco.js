@@ -1,8 +1,10 @@
 // --->>>---Inicio do código JS para a pagina alertaPreco.html ---<<<---
 
+import {Temporizador} from "./temporizador.js";
+
 //Classe AlertaAcao: Uma classa que é um alerta de cada ação que o usuario autenticado criar.
 class AlertaAcao {
-    constructor(Usuario, idProduto, descricao, valorAntigo, valorDesejado, valorAtual, valorCompra, acao) {
+    constructor(Usuario, idProduto, descricao, valorAntigo, valorDesejado, valorAtual, valorCompra, acao, dataCompra) {
         this.Usuario = Usuario;
         this.idProduto = idProduto;
         this.descricao = descricao;
@@ -11,6 +13,7 @@ class AlertaAcao {
         this.valorAtual = valorAtual;
         this.valorCompra = valorCompra;
         this.acao = acao;
+        this.dataCompra = dataCompra;
     }
 }
 
@@ -78,11 +81,7 @@ async function addIdValorProduto() {
         let resposta = await fetch("https://api-odinline.odiloncorrea.com/produto/" + usuario.chave + "/usuario");
         let produtosUsuario = await resposta.json();
 
-        console.log(produtosUsuario);
-
         let descricaoProduto = selectProduto.val();
-
-        console.log(descricaoProduto);
 
         produtosUsuario.forEach(produto => {
             if (produto.descricao === descricaoProduto) {
@@ -112,8 +111,9 @@ async function cadastrarAcao() {
             let acao = selectAcao.val();
             let valorAtual = null;
             let valorCompra = null;
+            let dataCompra = null;
 
-            let alertaAcao = new AlertaAcao(usuario, idProduto, produto, valorAntigo, valorDesejado, valorAtual, valorCompra, acao); //Crio um objeto alerta.
+            let alertaAcao = new AlertaAcao(usuario, idProduto, produto, valorAntigo, valorDesejado, valorAtual, valorCompra, acao, dataCompra); //Crio um objeto alerta.
 
             if (acao === "Notificacao") {
                 alertasAcao.push(alertaAcao); //Adiciono na lista de alertas o alerta que acabou de ser instanciado.                 
@@ -122,6 +122,8 @@ async function cadastrarAcao() {
                 localStorage.setItem("notificacao", JSON.stringify(notificacao)); //Salvo no localStorage
             } else if (acao === "Compra") {
                 alertaAcao.valorCompra = valorAntigo;
+                let data = new Date();
+                alertaAcao.dataCompra = data.toLocaleDateString("pt-BR") + " " + data.toLocaleTimeString("pt-BR");
                 compras.push(alertaAcao);
                 localStorage.setItem("compras", JSON.stringify(compras)); //Salvo no localStorage
             }
@@ -137,10 +139,60 @@ async function cadastrarAcao() {
     }
 }
 
-    document.addEventListener('keyup', function (event) {
-        let botaoCadastrar = document.getElementById("buttonMenu");
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            botaoCadastrar.click();
+document.addEventListener('keyup', function (event) {
+    let botaoCadastrar = document.getElementById("buttonMenu");
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        botaoCadastrar.click();
+    }
+});
+
+/*async function monitorarPreco() {
+    try {
+        let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado")); //Recebe o usuario online
+        let resposta = await fetch("https://api-odinline.odiloncorrea.com/produto/" + usuario.chave + "/usuario");
+        let produtos = await resposta.json();
+        let notificacoes = JSON.parse(localStorage.getItem("notificacao")); //Recebe as notificações.
+        let alertaPreco = JSON.parse(localStorage.getItem("alertasPreco")); //Recebe todos os alertas cadastrado. 
+        alertaPreco = alertaPreco.filter(alerta => {
+            return alerta.acao == "Notificacao";
+        });
+        let compras = JSON.parse(localStorage.getItem("compras")); //Recebe as compras.
+        let valorAlterado = null;
+
+        for (let i = 0; i < produtos.length; i++) {
+            valorAlterado = produtos[i].valor;
+            let produto = produtos[i];
+            let produtoNotificado = alertaPreco.filter(alerta => {
+                return produto.id === parseInt(alerta.idProduto);
+            }); //Verifico se eu tenho um produto dentro do meu vetor de alerta de preços com notificações.
+        
+            if (!(produtoNotificado.length === 0) && (parseFloat(produtoNotificado[0].valorDesejado) === valorAlterado)) {
+                produtoNotificado[0].valorAtual = valorAlterado;
+                produtoNotificado[0].acao = "Compra";
+                produtoNotificado[0].valorCompra = valorAlterado;
+                let data = new Date();
+                produtoNotificado[0].dataCompra = data.toLocaleDateString("pt-BR") + " " + data.toLocaleTimeString("pt-BR");
+                alert("O produto " + produtoNotificado[0].descricao + " entrou em promoção, no valor de R$" + valorAlterado + ". Compra realizada!!!");
+                compras.push(produtoNotificado[0]);
+                indexAlerta = alertaPreco.indexOf(produtoNotificado[0]);
+                indexNotificações = notificacoes.indexOf(produtoNotificado[0]);
+                alertaPreco.splice(indexAlerta, 1);
+                notificacoes.splice(indexNotificações, 1);
+                localStorage.setItem("notificacao", JSON.stringify(notificacoes)); //Salvo no localStorage
+                localStorage.setItem("alertasPreco", JSON.stringify(alertaPreco)); //Salvo no localStorage
+                localStorage.setItem("compras", JSON.stringify(compras)); //Salvo no localStorage
+                apagarLinhasTabela();
+                mostrarTabela();
+            }
         }
-    })
+    } catch (error) {
+        console.log("Error: " + error);
+    }
+};*/
+
+setInterval(() => {
+    let monitorarPreco = new Temporizador();
+    monitorarPreco.monitorarPreco();
+    console.log("Fez a verificação no site Odinline!");
+}, 1000*10);

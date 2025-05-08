@@ -1,5 +1,7 @@
 // --->>>---Inicio do código JS para a pagina menuAcesso.html ---<<<---
 
+import {Temporizador} from "./temporizador.js";
+
 
 //Variaveis globais: Aqui tem todas as variaveis globais que utilizo para a pagina menuAcesso.html, como para pegar os elementos html (input, button).
 let paragrafoNomeUsuario = $("#usuarioOn"); //Recebe o paragrafo para colocar o nome do usuario online na pagina.
@@ -59,8 +61,8 @@ function mostrarTabela() {
                 `<tr>
                 <td>${alerta.idProduto}</td>
                 <td>${alerta.descricao}</td>
-                <td id="valorAntigo">R$${alerta.valorAntigo}</td>
-                <td id="valorDesejado">R$${alerta.valorDesejado}</td>
+                <td>R$${alerta.valorAntigo}</td>
+                <td>R$${alerta.valorDesejado}</td>
                 <td>${alerta.acao}</td>
                 <td><button type="button" class="BtnCancelarAcao" onclick="cancelarAcao(this)">Cancelar Ação</button></td>
             </tr>`
@@ -93,7 +95,7 @@ function cancelarAcao(botao) {
     }
 }
 
-async function monitorarPreco() {
+/*async function monitorarPreco() {
     try {
         let usuario = JSON.parse(localStorage.getItem("usuarioAutenticado")); //Recebe o usuario online
         let resposta = await fetch("https://api-odinline.odiloncorrea.com/produto/" + usuario.chave + "/usuario");
@@ -112,11 +114,13 @@ async function monitorarPreco() {
             let produtoNotificado = alertaPreco.filter(alerta => {
                 return produto.id === parseInt(alerta.idProduto);
             }); //Verifico se eu tenho um produto dentro do meu vetor de alerta de preços com notificações.
-        
-            if (!(produtoNotificado.length === 0) && (parseFloat(produtoNotificado[0].valorDesejado) === valorAlterado)) {
+            
+            if (!(produtoNotificado.length === 0) && (valorAlterado <= (parseFloat(produtoNotificado[0].valorDesejado)))) {
                 produtoNotificado[0].valorAtual = valorAlterado;
                 produtoNotificado[0].acao = "Compra";
                 produtoNotificado[0].valorCompra = valorAlterado;
+                let data = new Date();
+                produtoNotificado[0].dataCompra = data.toLocaleDateString("pt-BR") + " " + data.toLocaleTimeString("pt-BR");
                 alert("O produto " + produtoNotificado[0].descricao + " entrou em promoção, no valor de R$" + valorAlterado + ". Compra realizada!!!");
                 compras.push(produtoNotificado[0]);
                 indexAlerta = alertaPreco.indexOf(produtoNotificado[0]);
@@ -125,7 +129,7 @@ async function monitorarPreco() {
                 notificacoes.splice(indexNotificações, 1);
                 localStorage.setItem("notificacao", JSON.stringify(notificacoes)); //Salvo no localStorage
                 localStorage.setItem("alertasPreco", JSON.stringify(alertaPreco)); //Salvo no localStorage
-                localStorage.setItem("compras", JSON.stringify(compras)); //Salvo no localStorage*/
+                localStorage.setItem("compras", JSON.stringify(compras)); //Salvo no localStorage
                 apagarLinhasTabela();
                 mostrarTabela();
             }
@@ -133,9 +137,10 @@ async function monitorarPreco() {
     } catch (error) {
         console.log("Error: " + error);
     }
-};
+};*/
 
 setInterval(() => {
-    monitorarPreco();
+    let monitorarPreco = new Temporizador();
+    monitorarPreco.monitorarPreco();
     console.log("Fez a verificação no site Odinline!");
-}, 1000*60);
+}, 1000*10);
