@@ -1,7 +1,5 @@
 // --->>>---Inicio do código JS para a pagina alertaPreco.html ---<<<---
 
-import {Temporizador} from "./temporizador.js";
-
 //Classe AlertaAcao: Uma classa que é um alerta de cada ação que o usuario autenticado criar.
 class AlertaAcao {
     constructor(Usuario, idProduto, descricao, valorAntigo, valorDesejado, valorAtual, valorCompra, acao, dataCompra) {
@@ -191,8 +189,3 @@ document.addEventListener('keyup', function (event) {
     }
 };*/
 
-setInterval(() => {
-    let monitorarPreco = new Temporizador();
-    monitorarPreco.monitorarPreco();
-    console.log("Fez a verificação no site Odinline!");
-}, 1000*10);
